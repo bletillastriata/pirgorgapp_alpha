@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>PIRG</title>
+
+	<base target="_top">
+    
+    
+    <!-- Import bootstrap and jquery modules --> 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<base target="_top"> <!-- This line is necessary to have multiple pages!! -->
+
+</head>
+
+<body>
+	<header>
+		<h2>This Is A Title</h2>
+        <i><small>List Generator for General Phonebanking</small></i>
+	</header>
+
+	<br>
+
+	<div class="container">
+      <!--  <?var url = getScriptUrl();?><a href='<?=url?>?page=tabling'> <button type="button" class="btn btn-primary">Go to Event/Table Planning</button></a> -->
+<br><br>
+<div class="row">
+    <div class="col">
+ 		<form id="eventScheduling">
+        
+              <!-- Creates dropdown menu for choosing campaign -->
+              <div class="form-group">
+                  <h4>I'm looking for people interested in . . .</h4>
+                      <select name="campaign" class="form-control">
+                          <option>Affordable Textbooks</option>
+                          <option>Labor Conditions</option>
+                          <option>Save the Bay</option>
+                          <option>Survey Corps</option>
+                          <option>Zero Hunger on Campus</option>
+                      </select>
+                      <br>
+
+                  <!-- Creates dropdown menu for choosing people interested in volunteering, etc. -->
+                  <h4>These people should also have an interest in . . .</h4>
+                      <select name="criteria" class="form-control">
+                          <option>volunteering</option>
+                          <option>eating large amounts of cheese</option>
+                          <option>playing marbles</option>
+                          <option>knitting socks for cats</option>
+                      </select>
+                      <br>
+      
+                  <!-- Creates datepicker field -->
+                  <h4>Enter Event/Table Date:</h4>
+                      <input class="form-control" id="date" name="date" placeholder="Click For Date Picker" type="text"/>
+                  <br>
+                  
+                   <!-- Creates input field for location-->
+                  <h4>Enter Event/Table Location:</h4>
+                      	<input class="form-control" type="text" name="location" placeholder="McKeldin, Chem Building, etc">
+
+                  <br>
+
+                  <!-- Creates submit button -->
+                  <br>
+                  	<input class="form-control turtle" type="submit" name="submit" value="Generate List">
+              </div>
+          </form>
+        </div>
+
+      <div class="col-md-7">
+      
+        <!-- This will be hidden until the user clicks "Generate List"-->
+          <div class="result result1" id="result">
+            <p id="loading">Generating list! This may take a moment. Please do not navigate away from this page.</p>
+
+           
+          </div>     
+
+       </div>
+ 	</div>
+    </div>
+    <br><br>
+    <footer>
+		Graphic design is (not) my passion!! <br><i>App Vers. 1.3</i>
+	</footer>
+    
+  <style>
+        html, body {
+           <!-- background: #f8f8f8; -->
+            color: #2d3436;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: normal;
+            line-height: 1.5;
+        }
+        
+        header {
+            background-color: #0B2BA1;
+            text-align: center;
+            color: #EFF2FA;
+            margin-bottom: 0;
+            padding: 3em;
+        }
+        
+        footer {
+            background-color: grey;
+            text-align: left;
+            margin-top: 0;
+            padding: 2em;
+        }
+        
+            
+        .result {
+                display: none;
+              }
+              
+        .progress {
+         display: none;
+        }
+
+  </style>
+
+  <script>
+      $("header").click(function() {
+                  alert("You clicked the header! Good for you :D");
+              })  
+              
+      
+      // This creates the datepicker which is used in the HTML form
+      
+      $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'mm/dd/yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      })
+      
+      const eventCreated = $("#eventScheduling");
+      console.log(eventCreated);
+      
+      eventCreated.on("submit", function(e){
+          e.preventDefault();
+      
+          let campaign = {'campaign' : this.querySelector('select[name="campaign"]').value};
+          let info = {
+              'criteria': this.querySelector('select[name="criteria"]').value,
+              'date' : this.querySelector('input[name="date"]').value,
+              'location' : this.querySelector('input[name="location"]').value
+          };    // this saves the information the user input in two objects called "campaign" and "info"
+      
+          /* passes campaign and info to createFilteredList() function on the back end */
+          google.script.run.withSuccessHandler(success).createFilteredList(campaign, info);
+          
+          
+          console.log(campaign);
+          console.log(info);
+      })
+      
+      
+      /* The backend function createFilteredList() returns an array, "info", which is used to create the 
+       * table on the front end. */
+      function success(info){
+        // var sheetIDNum = info.sheetID;
+        // console.log("SheetID: ");
+        // console.log(sheetIDNum);
+        console.log("purple penguins!");
+        console.log(info);
+        
+        var results = document.getElementById("result");
+        var link = document.createElement('a');
+        link.setAttribute('href', info);
+        link.innerHTML = info;
+        results.appendChild(link);
+        
+        // sends the data from info to showList() to be converted to table format
+      }
+      
+        /* The table is set to visible once the rows are loaded. */
+       $('.turtle').click(function(){
+        $('.result1').toggleClass('result');
+
+      })
+      
+      
+      /* This function takes each object in the result from createFilteredList() and uses it
+      * to create rows in the HTML table. */
+      
+      
+  </script>
+
+
+	
+
+</body>
+
+</html>
