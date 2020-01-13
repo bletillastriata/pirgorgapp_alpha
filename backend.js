@@ -1,6 +1,9 @@
  /* This is actually written in Google App Scripts, but
  * it is essentially javascript with some extra stuff
  * added by Google. */
+
+/* This app was accurate for the Fall 2018 campaigns and is NOT 
+* up to date for any semesters after that. */
  
  //[START] https://stackoverflow.com/questions/15668119/linking-to-another-html-page-in-google-apps-script
 
@@ -38,7 +41,7 @@ function getContent(filename) {
   
 function createFilteredList(campaign, info){
   console.log(campaign.campaign);
-  var mastersheet = SpreadsheetApp.openById("1yFUtP7ZwsjaiDW0F51cthjGEyFw-dH3GOzHEXLVBnEQ"); //masterlist document  
+  var mastersheet = SpreadsheetApp.openById([REDACTED FOR GITHUB]); //masterlist document  
   var originalSheet = mastersheet.getSheetByName("Master Sheet");
   var campaignSheetID;
   
@@ -56,18 +59,18 @@ function createFilteredList(campaign, info){
   */
   if(word == "Affordable Textbooks"){
     recruitingCampaign = 10;
-    campaignSheetID = '1vrk07rs9Qx2t9fUdLx1wJ_4bTa82Q8gFRn5t1DykIVQ';
+    campaignSheetID = [REDACTED FOR GITHUB];
   } else if(word == "Labor Conditions"){
     recruitingCampaign = 11;
-    campaignSheetID = '1EQCCUu1EOJb7n-WqWcJCc20LLvH4F7vrtNjWI_18Xiw';
+    campaignSheetID = [REDACTED FOR GITHUB];
   } else if(word == "Survey Corps"){
     recruitingCampaign = 12;
-    campaignSheetID = '1DXmAsn2ta4W8EHNG5whoWrPyuKwU-AKA2PZDAf_pOcQ';
+    campaignSheetID = [REDACTED FOR GITHUB];
   } else if(word == "Save the Bay"){
     recruitingCampaign = 13;
   } else if(word == "Zero Hunger on Campus"){
     recruitingCampaign = 14;
-    campaignSheetID = '1qhYRw09X23b78B4BR8q5DiSYblcG7V0OsZNLwqptoBY';
+    campaignSheetID = [REDACTED FOR GITHUB];
   }
   
   /* creates date in format MM/DD */
